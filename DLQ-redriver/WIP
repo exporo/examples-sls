@@ -1,0 +1,5 @@
+TODO
+1: An endpoint which can retrigger all messages
+2: An endpoint which can retrigger a comma separated list of messages
+3: An endpoint which which displays all messages
+3: An endpoint which which deletes a comma separated list of messages

@@ -1,0 +1,6 @@
+TODO
+1: endpoint which stores an dynamoDB entry
+2: dynamoDb streams invokes a Lambda with a DLQ
+3: lambda creates an event
+4: lambda receives event and recalculates a KPI and store it into a another dynamo db table
+5: endpoint for receiving the KPI
