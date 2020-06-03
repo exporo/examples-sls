@@ -1,0 +1,13 @@
+investmentRead:
+  handler: src/investment/read.handler
+  events:
+  - http:
+      path: /investment/{id}
+      method: GET
+
+investmentStore:
+  handler: src/investment/store.handler
+  events:
+  - http:
+      path: /investment
+      method: POST

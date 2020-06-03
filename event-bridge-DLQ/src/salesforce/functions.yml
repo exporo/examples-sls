@@ -1,0 +1,33 @@
+salesforceWebhook:
+  handler: src/salesforce/webhook.handler
+  events:
+  - http:
+      path: /salesforce/webhook
+      method: POST
+
+salesforceCustomerCreate:
+  handler: src/salesforce/customerCreate.handler
+  deadLetter:
+    sqs:  ${self:custom.UUID}-DLQ-salesforceCustomerCreate
+  events:
+  - eventBridge:
+      #TODO direct Referencing does not work https://github.com/serverless/serverless/issues/7063
+      eventBus: arn:aws:events:#{AWS::Region}:#{AWS::AccountId}:event-bus/${self:custom.UUID}-salesforce
+      pattern:
+        source:
+          - exporo.salesforce.customer
+        detail-type:
+          - create
+
+salesforceCustomerUpdate:
+  handler: src/salesforce/customerUpdate.handler
+  deadLetter:
+    sqs:  ${self:custom.UUID}-DLQ-salesforceCustomerUpdate
+  events:
+  - eventBridge:
+      eventBus: arn:aws:events:#{AWS::Region}:#{AWS::AccountId}:event-bus/${self:custom.UUID}-salesforce
+      pattern:
+        source:
+          - exporo.salesforce.customer
+        detail-type:
+          - update

@@ -1,0 +1,14 @@
+service: examples-sls-request-validation
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-central-1
+  logs:
+    restApi: true
+  tracing:
+    apiGateway: true
+    lambda: true
+
+functions:
+  - ${file(./src/payoutRelease/functions.yml)}

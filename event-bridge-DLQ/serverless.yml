@@ -1,0 +1,39 @@
+service: examples-sls-event-bridge-DLQ
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-central-1
+  logs:
+    restApi: true
+  tracing:
+    apiGateway: true
+    lambda: true
+
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+    - events:PutEvents
+    Resource:
+    - "Fn::GetAtt": [ SalesforceEventBridge, Arn ]
+  - Effect: Allow
+    Action:
+    - sqs:*
+    Resource:
+    - '*'
+
+  environment:
+    SALESFORCE_EVENT_BRIDGE: !Ref SalesforceEventBridge
+
+custom:
+  UUID: ${self:service.name}-${opt:stage, self:provider.stage}
+
+functions:
+  - ${file(./src/salesforce/functions.yml)}
+
+resources:
+- ${file(./src/salesforce/resources.yml)}
+
+plugins:
+  - serverless-plugin-lambda-dead-letter
+  - serverless-pseudo-parameters

@@ -1,0 +1,6 @@
+payoutReleaseStore:
+  handler: src/payoutRelease/store.handler
+  events:
+  - http:
+      path: /payoutRelease
+      method: POST

@@ -1,0 +1,31 @@
+service: examples-sls-event-sourcing
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-central-1
+
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+    - dynamodb:DescribeTable
+    - dynamodb:Query
+    - dynamodb:Scan
+    - dynamodb:GetItem
+    - dynamodb:PutItem
+    - dynamodb:UpdateItem
+    - dynamodb:DeleteItem
+    Resource:
+    - "Fn::GetAtt": [ DynamoDBInvestmentTable, Arn ]
+
+  environment:
+    DYNAMODB_INVESTMENT_TABLE: !Ref DynamoDBInvestmentTable
+
+custom:
+  UUID: ${self:service.name}-${opt:stage, self:provider.stage}
+
+functions:
+  - ${file(./src/investment/functions.yml)}
+
+resources:
+  - ${file(./src/investment/resources.yml)}

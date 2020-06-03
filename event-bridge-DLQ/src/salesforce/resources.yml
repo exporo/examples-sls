@@ -1,0 +1,6 @@
+Resources:
+  #EventBrigdes
+  SalesforceEventBridge:
+    Type: AWS::Events::EventBus
+    Properties:
+      Name: ${self:custom.UUID}-salesforce

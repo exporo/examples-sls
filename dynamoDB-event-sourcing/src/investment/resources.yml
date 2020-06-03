@@ -1,0 +1,18 @@
+Resources:
+  #DynamoDB Tables
+  DynamoDBInvestmentTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.UUID}__investment
+      AttributeDefinitions:
+      - AttributeName: investment_id
+        AttributeType: N
+      - AttributeName: timestamp
+        AttributeType: N
+      KeySchema:
+      - AttributeName: investment_id
+        KeyType: HASH
+      - AttributeName: timestamp
+        KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
+

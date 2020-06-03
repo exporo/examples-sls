@@ -1,0 +1,22 @@
+{
+  "name": "boilerplate-sls-event-bridge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "application/domain/salesforce/handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/exporo/boilerplate-sls-event-bridge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/exporo/boilerplate-sls-event-bridge/issues"
+  },
+  "homepage": "https://github.com/exporo/boilerplate-sls-event-bridge#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1"
+  }
+}
